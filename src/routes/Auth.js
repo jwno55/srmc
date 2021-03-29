@@ -1,4 +1,11 @@
 import React from "react";
+import TopBar from "components/TopAppBar";
 
- const Auth = () => <span>Auth</span>;
- export default Auth;
+const Auth = () => {
+    return(
+        <>
+            <TopBar/>
+        </>
+    );
+};
+export default Auth;
