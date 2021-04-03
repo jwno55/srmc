@@ -1,42 +1,56 @@
 import React from "react";
-import TopAppBar, {
-    TopAppBarFixedAdjust, 
-    TopAppBarIcon,
-    TopAppBarRow,
-    TopAppBarSection,
-    TopAppBarTitle,
-  } from '@material/react-top-app-bar';
-  import MaterialIcon from '@material/react-material-icon';
+import { Link } from "react-router-dom";
+import { makeStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import AccountCircle from '@material-ui/icons/AccountCircle';
 
-import '@material/react-top-app-bar/dist/top-app-bar.css';
-import '@material/react-material-icon/dist/material-icon.css';
+const useStyles = makeStyles((theme) => ({
+    root: {
+      flexGrow: 1,
+      marginBottom: theme.spacing(2), 
+    },
+    menuButton: {
+      marginRight: theme.spacing(2),
+    },
+    profileButton: {
+        
+    },
+    title: {
+      flexGrow: 1,
+    },
+    link: {
+        color: '#fff',
+        textDecoration: 'none',
+      },
+  }));
 
 const TopBar = () => {
+    const classes = useStyles();
     return(
         <>
-            <TopAppBar>
-                <TopAppBarRow>
-                <TopAppBarSection align='start'>
-                    <TopAppBarIcon navIcon tabIndex={0}>
-                    <MaterialIcon hasRipple icon='menu' onClick={() => console.log('click')}/>
-                    </TopAppBarIcon>
-                    <TopAppBarTitle>Hello Bereans!</TopAppBarTitle>
-                </TopAppBarSection>
-                <TopAppBarSection align='end' role='toolbar'>
-                    <TopAppBarIcon actionItem tabIndex={0}>
-                    <MaterialIcon 
-                        aria-label="print page" 
-                        hasRipple 
-                        icon='account_box' 
-                        onClick={() => console.log('print')}
-                    />
-                    </TopAppBarIcon>
-                </TopAppBarSection>
-                </TopAppBarRow>
-            </TopAppBar>
-            <TopAppBarFixedAdjust>
-                content
-            </TopAppBarFixedAdjust>
+        <div className={classes.root}>
+            <AppBar position="static">
+            <Toolbar>
+                <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+                    <MenuIcon />
+                </IconButton>
+                <Typography variant="h6" className={classes.title}>
+                    <Link to="/" className={classes.link}>
+                        Hello Bereans!
+                    </Link>
+                </Typography>
+                <IconButton edge="end" className={classes.profileButton} color="inherit" aria-label="porfile">
+                    <Link to="/profile" className={classes.link}>
+                        <AccountCircle />
+                    </Link>
+                </IconButton>
+            </Toolbar>
+        </AppBar>
+        </div>
         </>
     )
 };
