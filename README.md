@@ -1,6 +1,6 @@
 # SRMC App
 
-A SRMC App, currently for english users around the globe.
+A SungRak Mission Center App, currently for english users around the globe.
 
 This project uses firebase of Google.
 
