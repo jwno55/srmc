@@ -3,6 +3,12 @@ import AppRouter from "components/Router";
 import { authService } from "fbase";
 import CssBaseline from "@material-ui/core/CssBaseline"
 
+function unsafeAuth() {
+  let nullableAuth = null;
+  authService().then((auth) => nullableAuth = auth);
+  return nullableAuth;
+}
+
 function App() {
   const [init, setInit] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
