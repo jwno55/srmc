@@ -1,12 +1,7 @@
 import React, { useState, useEffect } from "react";
 import AppRouter from "components/Router";
 import { authService } from "fbase";
-
-function unsafeAuth() {
-  let nullableAuth = null;
-  authService().then((auth) => nullableAuth = auth);
-  return nullableAuth;
-}
+import CssBaseline from "@material-ui/core/CssBaseline"
 
 function App() {
   const [init, setInit] = useState(false);
@@ -23,6 +18,7 @@ function App() {
   }, []);
   return (
     <>
+      <CssBaseline />
       {init ? <AppRouter isLoggedIn={isLoggedIn} /> : "Initializing..."}
       <footer>&copy; {new Date().getFullYear()} SRMC</footer>
     </>

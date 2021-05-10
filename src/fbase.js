@@ -15,10 +15,4 @@ const firebaseConfig = {
 
   export const firebaseInstance = firebase;
 
-  export const authService = async function () {
-    if(firebase.apps?.length > 0) return firebase.auth();
-    else {
-      const res = await fetch('/__/firebase/init.json');
-      return firebase.initializeApp(await res.json()).auth();
-    }
-  }
+  export const authService = firebase.auth();
