@@ -28,6 +28,7 @@ const Auth = () => {
       } else {
         data = await authService.signInWithEmailAndPassword(email, password);
       }
+      console.log(data);
     } catch (error) {
       setError(error.message);
     }
@@ -42,36 +43,42 @@ const Auth = () => {
       provider = new firebaseInstance.auth.GoogleAuthProvider();
     }
     const data = await authService.signInWithPopup(provider);
+    console.log(data);
   };
   return (
     <div>
       <form onSubmit={onSubmit}>
-          <input
-              name="email"
-              type="email"
-              placeholder="Email"
-              required="required"
-              value={email}
-              onChange={onChange}/>
-          <input
-              name="password"
-              type="password"
-              placeholder="Password"
-              required="required"
-              value={password}
-              onChange={onChange}/>
-          <input type="submit" value={newAccount ? "Create Account" : "Sign In"}/>
-          {error}
+        <input
+          name="email"
+          type="email"
+          placeholder="Email"
+          required
+          value={email}
+          onChange={onChange}
+        />
+        <input
+          name="password"
+          type="password"
+          placeholder="Password"
+          required
+          value={password}
+          onChange={onChange}
+        />
+        <input
+          type="submit"
+          value={newAccount ? "Create Account" : "Sign In"}
+        />
+        {error}
       </form>
       <span onClick={toggleAccount}>
-          {newAccount ? "Sign In" : "Create Account"}
+        {newAccount ? "Sign In" : "Create Account"}
       </span>
-    <div>
+      <div>
         <button onClick={onSocialClick} name="google">
-            Continue with Google
+          Continue with Google
         </button>
+      </div>
     </div>
-</div>
   );
 };
 export default Auth;

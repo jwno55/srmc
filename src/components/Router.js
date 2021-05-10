@@ -14,26 +14,26 @@ import TopBar from "components/TopAppBar";
 const AppRouter = ({ isLoggedIn }) => {
   return (
     <Router>
-        {isLoggedIn && <TopBar />}
-        <Switch>
-            {isLoggedIn ? (
-              <>
-                <Route exact path="/">
-                    <Home />
-                </Route>
-                <Route exact path="/profile">
-                    <Profile />
-                </Route>
-              </>
-            ) : (
-              <>
-                <Route exact path="/">
-                    <Auth />
-                </Route>
-              </>
-            )}
-        </Switch>
-        {isLoggedIn && <Navigation />}
+      {isLoggedIn && <TopBar />}
+      <Switch>
+        {isLoggedIn ? (
+          <>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route exact path="/profile">
+              <Profile />
+            </Route>
+          </>
+        ) : (
+          <>
+            <Route exact path="/">
+              <Auth />
+            </Route>
+          </>
+        )}
+      </Switch>
+      {isLoggedIn && <Navigation />}
     </Router>
   );
 };
