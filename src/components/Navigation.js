@@ -1,16 +1,22 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
+
+const Footer = styled.ul`
+  color: red;
+  bottom: 0;
+`;
 
 const Navigation = () => (
   <nav>
-    <ul>
+    <Footer>
       <li>
         <Link to="/">Home</Link>
       </li>
       <li>
         <Link to="/profile">My Profile</Link>
       </li>
-    </ul>
+    </Footer>
   </nav>
 );
 export default Navigation;
