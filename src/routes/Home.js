@@ -1,4 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { bereaApi } from "api";
+import HomePresenter from "./HomePresenter";
 
-const Home = () => <span>Home</span>;
-export default Home;
+export default () => {
+    const [feeds, setFeeds] = useState({
+        loading: true,
+        nowFeeding: [],
+        nowFeedingError: null
+    });
+
+    const getData = async() => {
+        const [nowFeeding, nowFeedingError] = await bereaApi.nowFeeding();
+        setFeeds({
+            loading: false,
+            nowFeeding,
+            nowFeedingError
+        });
+    };
+    
+    useEffect(() =>{
+        getData();
+    }, []);
+
+    return <HomePresenter {...feeds} />;
+};
