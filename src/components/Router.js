@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import Auth from "routes/Auth";
 import Home from "routes/Home";
+import BookApplication from "routes/BookApplication";
 import Profile from "routes/Profile";
 import Navigation from "components/Navigation";
 import TopBar from "components/TopAppBar";
@@ -23,6 +24,9 @@ const AppRouter = ({ isLoggedIn }) => {
             </Route>
             <Route exact path="/profile">
               <Profile />
+            </Route>
+            <Route exact path="/bookapplication">
+              <BookApplication />
             </Route>
           </>
         ) : (
