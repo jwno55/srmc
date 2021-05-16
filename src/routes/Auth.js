@@ -170,11 +170,11 @@ const Auth = () => {
           />
         </div>
         <div>
-          <input
+          <button
             className={classes.login_button}
             type="submit"
-            value={newAccount ? "Create Account" : "Login"}
-          />
+          >{newAccount ? "Create Account" : "Login"}
+          </button>
         </div>
         {error}
       </form>
