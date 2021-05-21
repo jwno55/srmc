@@ -16,14 +16,14 @@ const useStyles = makeStyles((theme) => ({
     menuButton: {
       marginRight: theme.spacing(2),
     },
-    profileButton: {
-        
+    toolBar: {
+        backgroundColor: '#fff',
     },
     title: {
       flexGrow: 1,
     },
     link: {
-        color: '#fff',
+        color: '#000',
         textDecoration: 'none',
       },
   }));
@@ -34,10 +34,7 @@ const TopBar = () => {
         <>
         <div className={classes.root}>
             <AppBar position="static">
-            <Toolbar>
-                <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-                    <MenuIcon />
-                </IconButton>
+            <Toolbar className={classes.toolBar}>
                 <Typography variant="h6" className={classes.title}>
                     <Link to="/" className={classes.link}>
                         Hello Bereans!

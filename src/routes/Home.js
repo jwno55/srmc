@@ -17,6 +17,8 @@ export default () => {
             nowFeedingError
         });
     };
+
+    console.log(feeds);
     
     useEffect(() =>{
         getData();
