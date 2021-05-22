@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
 import Paper from "@material-ui/core/Paper";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
@@ -13,6 +12,7 @@ const useStyles = makeStyles((theme) => ({
   nav_area: {
     width:"100%",
     bottom: 0,
+    paddingBottom:"10px",
     position: "fixed",
   },
   root: {

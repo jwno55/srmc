@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
     feeds: {
-        marginBottom: '80px',
+        marginBottom: '90px',
     },
     feed: {
         height: '250px',

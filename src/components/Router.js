@@ -11,11 +11,13 @@ import BookApplication from "routes/BookApplication";
 import Profile from "routes/Profile";
 import Navigation from "components/Navigation";
 import TopBar from "components/TopAppBar";
+import ScrollToTop from "components/ScrollToTop";
 
 const AppRouter = ({ isLoggedIn }) => {
   return (
     <Router>
       {isLoggedIn && <TopBar />}
+      <ScrollToTop />
       <Switch>
         {isLoggedIn ? (
           <>
