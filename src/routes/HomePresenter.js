@@ -2,11 +2,14 @@ import React, { useState } from "react";
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
+    feeds: {
+        marginBottom: '80px',
+    },
     feed: {
         height: '250px',
         overflow: 'hidden',
         borderBottom: '1px solid #ccc',
-      },
+    },
     feedImg: {
       width: '100%',
     },
@@ -27,7 +30,7 @@ export default ({ loading, nowFeeding }) => {
     const classes = useStyles();
 
     return(
-    <div>
+    <div className={classes.feeds}>
         {loading ? (
             <div>loading</div>
         ) : (

@@ -20,5 +20,5 @@ const getAnything = async(path, params = {}) => {
 };
 
 export const bereaApi = {
-    nowFeeding: () => getAnything(`https://www.sungrakberea.org/wp-json/wp/v2/posts?per_page=20`)
+    nowFeeding: () => getAnything(`https://www.sungrakberea.org/wp-json/wp/v2/posts?per_page=10`)
 };
