@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { makeStyles } from '@material-ui/core/styles';
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     feeds: {
@@ -38,11 +39,13 @@ export default ({ loading, nowFeeding }) => {
                 <div>
                 {nowFeeding.map(feed => (
                     <>
-                    <div className={classes.feed}>
+                    <Link to={`/detail/${feed.id}`}>
+                    <div className={classes.feed} to={`/detail/${feed.id}`}>
                         <img className={classes.feedImg} src={feed.jetpack_featured_media_url} />
                     </div>
                     <div className={classes.feedTitle} dangerouslySetInnerHTML={ {__html: feed.title.rendered} }></div>
                     <div className={classes.feedDate}>{feed.date}</div>
+                    </Link>
                     </>
                 ))}
                 </div>

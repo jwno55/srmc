@@ -12,6 +12,7 @@ import Profile from "routes/Profile";
 import Navigation from "components/Navigation";
 import TopBar from "components/TopAppBar";
 import ScrollToTop from "components/ScrollToTop";
+import Detail from "routes/Detail";
 
 const AppRouter = ({ isLoggedIn }) => {
   return (
@@ -30,6 +31,7 @@ const AppRouter = ({ isLoggedIn }) => {
             <Route exact path="/bookapplication">
               <BookApplication />
             </Route>
+            <Route path="/detail/:id" component={Detail} />
           </>
         ) : (
           <>
