@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Paper from "@material-ui/core/Paper";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
@@ -12,13 +12,20 @@ const useStyles = makeStyles((theme) => ({
   nav_area: {
     width:"100%",
     bottom: 0,
-    paddingBottom:"10px",
+    paddingBottom:"24px",
     position: "fixed",
   },
   root: {
     color: "black",
     "&$selected": {
-      color: "red"
+      color: "tomato",
+      fontSize: "10px",
+    }
+  },
+  label: {
+    fontSize: "10px",
+    "&$selected": {
+      fontSize: "10px",
     }
   },
   selected: {}
@@ -26,32 +33,38 @@ const useStyles = makeStyles((theme) => ({
 
 const Navigation = () => {
   const classes = useStyles();
+  const [value, setValue] = React.useState(0);
+  const history = useHistory();
+  const goHome = () => history.push('/');
+  const goBookapplication = () => history.push('/bookapplication');
+  const goProfile = () => history.push('/profile');
+
   return(
     <Paper zDepth={1} className={classes.nav_area}>
-        <BottomNavigation value={1} showLabels={true}>
-          <Link to="/">
-            <BottomNavigationAction
-              classes={classes}
-              label="Home"
-              icon={<HomeIcon />}
-            />
-          </Link>
-
-          <Link to="/bookapplication">
-            <BottomNavigationAction
-              classes={classes}
-              label="Application"
-              icon={<MenuBookIcon />}
-            />
-          </Link>
-
-          <Link to="/profile">
-            <BottomNavigationAction
-              classes={classes}
-              label="account"
-              icon={<AccountBoxIcon />}
-            />
-          </Link>
+        <BottomNavigation 
+          value={value}
+          onChange={(event, newValue) => {
+            setValue(newValue);
+          }}
+          showLabels={true}>
+          <BottomNavigationAction
+            classes={classes}
+            label="TODAY"
+            icon={<HomeIcon />}
+            onClick={goHome}
+          />
+          <BottomNavigationAction
+            classes={classes}
+            label="APPLY"
+            icon={<MenuBookIcon />}
+            onClick={goBookapplication}
+          />
+          <BottomNavigationAction
+            classes={classes}
+            label="MY"
+            icon={<AccountBoxIcon />}
+            onClick={goProfile}
+          />
         </BottomNavigation>
       </Paper>
 )};

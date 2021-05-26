@@ -7,7 +7,7 @@ const useStyles = makeStyles((theme) => ({
         marginBottom: '90px',
     },
     feed: {
-        height: '250px',
+        height: '30vh',
         overflow: 'hidden',
         borderBottom: '1px solid #ccc',
     },
@@ -15,15 +15,28 @@ const useStyles = makeStyles((theme) => ({
       width: '100%',
     },
     feedTitle: {
-        marginTop:'10px',
-        marginLeft:'10px',
-        marginRight:'10px',
+        fontSize: '16px',
+        paddingTop:'10px',
+        paddingLeft:'30px',
+        paddingRight:'30px',
         fontWeight: 'bold',
     },
     feedDate: {
         opacity: '0.6',
-        marginLeft:'10px',
-        marginBottom:'20px',
+        fontSize: '10px',
+        paddingLeft:'30px',
+        paddingRight:'30px',
+        paddingBottom:'20px',
+    },
+    feedLink: {
+        color: "black",
+        textDecoration: 'none',
+        "&:visited": {
+            color: "black",
+        },
+    },
+    loadingStyle: {
+        padding: '20px',
     }
 }));
 
@@ -33,13 +46,13 @@ export default ({ loading, nowFeeding }) => {
     return(
     <div className={classes.feeds}>
         {loading ? (
-            <div>loading</div>
+            <div className={classes.loadingStyle}>loading...</div>
         ) : (
             <>
                 <div>
                 {nowFeeding.map(feed => (
                     <>
-                    <Link to={`/detail/${feed.id}`}>
+                    <Link to={`/detail/${feed.id}`} className={classes.feedLink}>
                     <div className={classes.feed} to={`/detail/${feed.id}`}>
                         <img className={classes.feedImg} src={feed.jetpack_featured_media_url} />
                     </div>

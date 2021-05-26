@@ -40,11 +40,6 @@ const TopBar = () => {
                         Hello Bereans!
                     </Link>
                 </Typography>
-                <IconButton edge="end" className={classes.profileButton} color="inherit" aria-label="porfile">
-                    <Link to="/profile" className={classes.link}>
-                        <AccountCircle />
-                    </Link>
-                </IconButton>
             </Toolbar>
         </AppBar>
         </div>
