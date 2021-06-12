@@ -9,6 +9,7 @@ import Auth from "routes/Auth";
 import Home from "routes/Home";
 import BookApplication from "routes/BookApplication";
 import Profile from "routes/Profile";
+import Books from "routes/Books";
 import Navigation from "components/Navigation";
 import TopBar from "components/TopAppBar";
 import ScrollToTop from "components/ScrollToTop";
@@ -24,6 +25,9 @@ const AppRouter = ({ isLoggedIn }) => {
           <>
             <Route exact path="/">
               <Home />
+            </Route>
+            <Route exact path="/books">
+              <Books />
             </Route>
             <Route exact path="/profile">
               <Profile />

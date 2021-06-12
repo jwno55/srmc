@@ -6,6 +6,7 @@ import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import HomeIcon from "@material-ui/icons/Home";
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
+import CartIcon from '@material-ui/icons/ShoppingCart';
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
@@ -36,6 +37,7 @@ const Navigation = () => {
   const [value, setValue] = React.useState(0);
   const history = useHistory();
   const goHome = () => history.push('/');
+  const goBooks = () => history.push('/books');
   const goBookapplication = () => history.push('/bookapplication');
   const goProfile = () => history.push('/profile');
 
@@ -55,8 +57,14 @@ const Navigation = () => {
           />
           <BottomNavigationAction
             classes={classes}
-            label="APPLY"
+            label="BOOKS"
             icon={<MenuBookIcon />}
+            onClick={goBooks}
+          />
+          <BottomNavigationAction
+            classes={classes}
+            label="APPLY"
+            icon={<CartIcon />}
             onClick={goBookapplication}
           />
           <BottomNavigationAction
