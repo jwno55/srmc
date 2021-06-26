@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
         marginBottom: '90px',
     },
     feed: {
-        height: '35vh',
+        height: '32vh',
         overflow: 'hidden',
         borderBottom: '1px solid #ccc',
     },
