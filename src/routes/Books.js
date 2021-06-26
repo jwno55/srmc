@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { dbService } from "fbase";
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -9,26 +10,24 @@ import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-      width: '100%',
-      backgroundColor: theme.palette.background.paper,
-    },
-    inline: {
-      display: 'inline',
-    },
-    bookImageBox: {
-        width: '30%'
-    },
-    bookImage: {
-        width: '100%'
-    },
-  }));
-  
+  bookroot: {
+    width: '100%',
+  },
+  inline: {
+    display: 'inline',
+  },
+  bookImageBox: {
+      width: '30%'
+  },
+  bookImage: {
+      width: '100%'
+  },
+}));
 
 export default () => {
     const classes = useStyles();
     return(
-        <List className={classes.root}>
+        <List className={classes.bookroot}>
         <ListItem alignItems="flex-start">
             <ListItemAvatar>
                 <Avatar alt="Travis Howard" src="/images/book1.jpg" />
