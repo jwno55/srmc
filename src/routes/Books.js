@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { dbService } from "fbase";
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import Divider from '@material-ui/core/Divider';
 import ListItemText from '@material-ui/core/ListItemText';
 
 const useStyles = makeStyles((theme) => ({
@@ -42,68 +41,44 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default () => {
+    const [nweets, setNweets] = useState([]);
+    useEffect(() => {
+      dbService.collection("bookapplication").onSnapshot((snapshot) => {
+        const nweetArray = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setNweets(nweetArray);
+      });
+    }, []);
+
+    console.log(nweets);
+
     const classes = useStyles();
     return(
+        
         <List className={classes.bookroot}>
-          <ListItem className={classes.ListItem}>
+          {nweets.map((nweet) => (
+          <ListItem className={classes.ListItem} key={nweet.id}>
               <div className={classes.bookImageBox}>
-                  <img className={classes.bookImage} alt="Travis Howard" src="/images/book1.jpg" />
+                  <img className={classes.bookImage} alt="Travis Howard" src={nweet.attachmentUrl} />
               </div>
               <ListItemText
                 className={classes.bookTextBox}
-                primary="The Narrow Gate"
+                primary={nweet.text}
                 secondary={
                 <div className={classes.bookTextBoxIn}>
                     <div className={classes.inline} >
-                    Berean books 110
+                      Berean books 110
                     </div>
                     <div>
-                        In June, Sungrak Mission Center published a new translated English version of Let Us Know Jesus…
+                      In June, Sungrak Mission Center published a new translated English version of Let Us Know Jesus…
                     </div>
                 </div>
                 }
               />
           </ListItem>
-          <Divider variant="inset" component="li" />
-          <ListItem className={classes.ListItem}>
-              <div className={classes.bookImageBox}>
-                  <img className={classes.bookImage} alt="Travis Howard" src="/images/book2.jpg" />
-              </div>
-              <ListItemText
-                className={classes.bookTextBox}
-                primary="The Narrow Gate"
-                secondary={
-                <>
-                    <div className={classes.inline} >
-                    Berean books 110
-                    </div>
-                    <div>
-                        In June, Sungrak Mission Center published a new translated English version of Let Us Know Jesus…
-                    </div>
-                </>
-                }
-              />
-          </ListItem>
-          <Divider variant="inset" component="li" />
-          <ListItem className={classes.ListItem}>
-              <div className={classes.bookImageBox}>
-                  <img className={classes.bookImage} alt="Travis Howard" src="/images/book3.jpg" />
-              </div>
-              <ListItemText
-                className={classes.bookTextBox}
-                primary="The Narrow Gate"
-                secondary={
-                <>
-                    <div className={classes.inline} >
-                    Berean books 110
-                    </div>
-                    <div>
-                        In June, Sungrak Mission Center published a new translated English version of Let Us Know Jesus…
-                    </div>
-                </>
-                }
-              />
-          </ListItem>
+          ))}
       </List>
     )
 };
