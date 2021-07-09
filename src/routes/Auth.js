@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { authService, firebaseInstance } from "fbase";
+import { fb } from "fbase";
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
@@ -73,7 +73,6 @@ const useStyles = makeStyles((theme) => ({
     width:"100%",
     height:56,
     background: "white",
-    border: 0,
     borderRadius: 4,
     color: '#2E2E2E',
     padding: '0 30px',
@@ -109,12 +108,12 @@ const Auth = () => {
     try {
       let data;
       if (newAccount) {
-        data = await authService.createUserWithEmailAndPassword(
+        data = await fb.auth().createUserWithEmailAndPassword(
           email,
           password
         );
       } else {
-        data = await authService.signInWithEmailAndPassword(email, password);
+        data = await fb.auth().signInWithEmailAndPassword(email, password);
       }
       console.log(data);
     } catch (error) {
@@ -128,9 +127,9 @@ const Auth = () => {
     } = event;
     let provider;
     if (name === "google") {
-      provider = new firebaseInstance.auth.GoogleAuthProvider();
+      provider = new fb.auth.GoogleAuthProvider();
     }
-    const data = await authService.signInWithPopup(provider);
+    const { user } = await fb.auth().signInWithPopup(provider);
     //console.log(data);
   };
   return (

@@ -1,37 +1,36 @@
 import React, { useState, useEffect } from "react";
-import { dbService } from "fbase";
-import { authService } from "fbase";
+import { fb } from "fbase";
 import { useHistory } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
 
 
 const useStyles = makeStyles((theme) => ({
   profile_box: {
-      margin: '20px',
+    margin: '20px',
   },
   admin_box: {
     margin: '20px',
-},
+  },
 }));
 
-export default () => {
+const Profile = () => {
   const classes = useStyles();
 
   const history = useHistory();
 
   const onLogOutClick = () => {
-    authService.signOut();
+    fb.auth().signOut();
     history.push("/");
   };
 
   const [nweet, setNweet] = useState("");
-  const [attachment, setAttachment] = useState();
-  
+  const [attachment, setAttachment] = useState(null);
+
   const onSubmit = async (event) => {
     event.preventDefault();
-    await dbService.collection("bookapplication").add({
+    await fb.firestore().collection("bookapplication").add({
       text: nweet,
-      createdAt: Date.now(),
+      createdAt: fb.firestore.Timestamp.fromDate(new Date()),
     });
     setNweet("");
   };
@@ -83,9 +82,10 @@ export default () => {
             <img src={attachment} width="50px" height="50px" />
             <button onClick={onClearAttachment}>Clear</button>
           </div>
-        )}
+          )}
         </form>
       </div>
     </>
   );
 };
+export default Profile;

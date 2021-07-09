@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { dbService, storageService } from "fbase";
+import { fb } from "fbase";
 import { v4 as uuidv4 } from "uuid";
 
 const BookApplication = () => {
   const [books, setBooks] = useState("");
-  const [attachment, setAttachment] = useState();
+  const [attachment, setAttachment] = useState(null);
 
   const onSubmit = async (event) => {
     event.preventDefault();
     let attachmentUrl = "";
     if (attachment !== "") {
-      const attachmentRef = storageService
+      const attachmentRef = fb.storage()
         .ref()
         .child(`${uuidv4()}`);
       const response = await attachmentRef.putString(attachment, "data_url");
@@ -18,10 +18,10 @@ const BookApplication = () => {
     }
     const bookObj = {
       text: books,
-      createdAt: Date.now(),
+      createdAt: fb.firestore.Timestamp.fromDate(new Date()),
       attachmentUrl,
     };
-    await dbService.collection("bookapplication").add(bookObj);
+    await fb.firestore().collection("bookapplication").add(bookObj);
     setBooks("");
     setAttachment("");
   };
@@ -50,7 +50,7 @@ const BookApplication = () => {
   };
 
   const onClearAttachment = () => setAttachment(null);
-  
+
   return (
     <div>
       <form onSubmit={onSubmit}>

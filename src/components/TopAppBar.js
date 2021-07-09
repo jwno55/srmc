@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import { fb } from "fbase";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -30,6 +31,10 @@ const useStyles = makeStyles((theme) => ({
 
 const TopBar = () => {
     const classes = useStyles();
+    const [name, setName] = useState("");
+
+    useEffect(() => fb.auth().onAuthStateChanged((user) => setName(user.displayName)), []);
+
     return(
         <>
         <div className={classes.root}>
@@ -37,7 +42,7 @@ const TopBar = () => {
             <Toolbar className={classes.toolBar}>
                 <Typography variant="h6" className={classes.title}>
                     <Link to="/" className={classes.link}>
-                        Hello Bereans!
+                        Hello {name == "" ? "Bereans" : name}!
                     </Link>
                 </Typography>
             </Toolbar>

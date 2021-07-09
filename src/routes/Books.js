@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   }));
   
 
-export default () => {
+const Books = () => {
     const classes = useStyles();
     return(
         <List className={classes.root}>
@@ -88,3 +88,4 @@ export default () => {
       </List>
     )
 };
+export default Books;

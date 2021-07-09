@@ -2,28 +2,23 @@ import React, { useEffect, useState } from "react";
 import { bereaApi } from "api";
 import DetailPresenter from "./DetailPresenter";
 
-export default ({ match }) => {
+const Detail = ({ match }) => {
 
     const [feed, setFeed] = useState({
         loading: true,
-        Feeding: [],
-        FeedingError: null
+        Feeding: null
     });
 
     const getData = async() => {
-        const [Feeding, FeedingError] = await bereaApi.feed(match.params.id);
+        const Feeding = await bereaApi.feed(match.params.id);
         setFeed({
             loading: false,
-            Feeding,
-            FeedingError
+            Feeding
         });
     };
-
-    console.log(feed);
     
-    useEffect(() =>{
-        getData();
-    }, []);
+    useEffect(() => getData(), []);
 
     return <DetailPresenter {...feed} />;
 };
+export default Detail;
