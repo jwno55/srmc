@@ -24,6 +24,7 @@ export default () => {
   return (
     <>
       <div className={classes.profile_box}>
+        <p>Profile Page</p>
         <button onClick={onLogOutClick}>Log Out</button>
       </div>
     </>

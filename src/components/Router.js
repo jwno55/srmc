@@ -14,6 +14,8 @@ import Navigation from "components/Navigation";
 import TopBar from "components/TopAppBar";
 import ScrollToTop from "components/ScrollToTop";
 import Detail from "routes/Detail";
+import Cart from "routes/Cart";
+import BookDetail from "routes/BookDetail";
 
 const AppRouter = ({ isLoggedIn }) => {
   return (
@@ -32,10 +34,12 @@ const AppRouter = ({ isLoggedIn }) => {
             <Route exact path="/profile">
               <Profile />
             </Route>
-            <Route exact path="/bookapplication">
-              <BookApplication />
+            <Route exact path="/carts">
+              <Cart />
             </Route>
             <Route path="/detail/:id" component={Detail} />
+            <Route path="/bookapplication" component={BookApplication} />
+            <Route path="/bookdetail/:id" component={BookDetail} />
           </>
         ) : (
           <>

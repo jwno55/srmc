@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   bookroot: {
@@ -41,43 +42,42 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default () => {
-    const [nweets, setNweets] = useState([]);
+    const [books, setBooks] = useState([]);
     useEffect(() => {
       dbService.collection("bookapplication").onSnapshot((snapshot) => {
-        const nweetArray = snapshot.docs.map((doc) => ({
+        const bookArray = snapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
         }));
-        setNweets(nweetArray);
+        setBooks(bookArray);
       });
     }, []);
 
-    console.log(nweets);
+    console.log(books);
 
     const classes = useStyles();
     return(
         
         <List className={classes.bookroot}>
-          {nweets.map((nweet) => (
-          <ListItem className={classes.ListItem} key={nweet.id}>
+          {books.map((book) => (
+          <Link to={`/bookdetail/${book.id}`}>
+          <ListItem className={classes.ListItem} key={book.id}>
               <div className={classes.bookImageBox}>
-                  <img className={classes.bookImage} alt="Travis Howard" src={nweet.attachmentUrl} />
+                  <img className={classes.bookImage} alt="Travis Howard" src={book.attachmentUrl} />
               </div>
               <ListItemText
                 className={classes.bookTextBox}
-                primary={nweet.text}
+                primary={book.title}
                 secondary={
                 <div className={classes.bookTextBoxIn}>
                     <div className={classes.inline} >
-                      Berean books 110
-                    </div>
-                    <div>
-                      In June, Sungrak Mission Center published a new translated English version of Let Us Know Jesus…
+                      {book.text}
                     </div>
                 </div>
                 }
               />
           </ListItem>
+          </Link>
           ))}
       </List>
     )

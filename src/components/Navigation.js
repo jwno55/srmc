@@ -38,7 +38,7 @@ const Navigation = () => {
   const history = useHistory();
   const goHome = () => history.push('/');
   const goBooks = () => history.push('/books');
-  const goBookapplication = () => history.push('/bookapplication');
+  const goCarts = () => history.push('/carts');
   const goProfile = () => history.push('/profile');
 
   return(
@@ -65,7 +65,7 @@ const Navigation = () => {
             classes={classes}
             label="APPLY"
             icon={<CartIcon />}
-            onClick={goBookapplication}
+            onClick={goCarts}
           />
           <BottomNavigationAction
             classes={classes}
