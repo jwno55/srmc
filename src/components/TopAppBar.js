@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
     root: {
+      backgroundColor: '#000',
       flexGrow: 1,
       zIndex:10,
     },
@@ -21,8 +22,10 @@ const useStyles = makeStyles((theme) => ({
       flexGrow: 1,
     },
     link: {
-        color: '#000',
+        color: '#919191',
         textDecoration: 'none',
+        fontSize: '1rem',
+        fontWeight: '800',
       },
   }));
 
