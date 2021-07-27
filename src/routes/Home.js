@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import { bereaApi } from "api";
 import HomePresenter from "./HomePresenter";
 
-export default () => {
+export default ( {userObj} ) => {
+
     const [feeds, setFeeds] = useState({
         loading: true,
         nowFeeding: [],
-        nowFeedingError: null
+        nowFeedingError: null,
+        userObj: []
     });
 
     const getData = async() => {
@@ -14,11 +16,12 @@ export default () => {
         setFeeds({
             loading: false,
             nowFeeding,
-            nowFeedingError
+            nowFeedingError,
+            userObj: userObj
         });
     };
 
-    console.log(feeds);
+    //console.log(feeds);
     
     useEffect(() =>{
         getData();

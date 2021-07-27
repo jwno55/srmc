@@ -49,7 +49,8 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export default ({ loading, nowFeeding }) => {
+export default ({ loading, nowFeeding, userObj }) => {
+
     const classes = useStyles();
 
     return(

@@ -17,22 +17,22 @@ import Detail from "routes/Detail";
 import Cart from "routes/Cart";
 import BookDetail from "routes/BookDetail";
 
-const AppRouter = ({ isLoggedIn }) => {
+const AppRouter = ({ refresUser, isLoggedIn, userObj }) => {
   return (
     <Router>
-      {isLoggedIn && <TopBar />}
+      {isLoggedIn && <TopBar userObj={userObj} />}
       <ScrollToTop />
       <Switch>
         {isLoggedIn ? (
           <>
             <Route exact path="/">
-              <Home />
+              <Home userObj={userObj} />
             </Route>
             <Route exact path="/books">
               <Books />
             </Route>
             <Route exact path="/profile">
-              <Profile />
+              <Profile userObj={userObj} refresUser={refresUser} />
             </Route>
             <Route exact path="/carts">
               <Cart />

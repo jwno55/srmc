@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
       },
   }));
 
-const TopBar = () => {
+const TopBar = ({userObj}) => {
     const classes = useStyles();
     return(
         <>
@@ -38,7 +38,7 @@ const TopBar = () => {
             <Toolbar className={classes.toolBar}>
                 <Typography variant="h6" className={classes.title}>
                     <Link to="/" className={classes.link}>
-                        Hello Bereans!
+                        Hello {userObj.displayName}
                     </Link>
                 </Typography>
             </Toolbar>

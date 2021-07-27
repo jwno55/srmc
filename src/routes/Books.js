@@ -42,22 +42,35 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default () => {
-    const [books, setBooks] = useState([]);
-    useEffect(() => {
-      dbService.collection("bookapplication").onSnapshot((snapshot) => {
-        const bookArray = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        setBooks(bookArray);
-      });
-    }, []);
-
-    console.log(books);
+    // const [books, setBooks] = useState([]);
+    // useEffect(() => {
+    //   dbService.collection("bookapplication").onSnapshot((snapshot) => {
+    //     const bookArray = snapshot.docs.map((doc) => ({
+    //       id: doc.id,
+    //       ...doc.data(),
+    //     }));
+    //     setBooks(bookArray);
+    //   });
+    // }, []);
 
     const classes = useStyles();
+
+    const [books, setBooks] = useState([]);
+
+    const getSrBooks = async () => {
+      const books = await dbService
+        .collection("bookapplication")
+        .orderBy("createdAt","desc")
+        .get();
+        setBooks(books.docs.map((doc) => doc.data()));
+        // console.log(books.docs.map((doc) => doc.data()));
+    };
+  
+    useEffect(() => {
+      getSrBooks();
+    }, []);
+
     return(
-        
         <List className={classes.bookroot}>
           {books.map((book) => (
           <Link to={`/bookdetail/${book.id}`}>
