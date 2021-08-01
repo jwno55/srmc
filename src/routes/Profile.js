@@ -52,6 +52,7 @@ export default ({refresUser, userObj}) => {
           />
           <input type="submit" value="Update Profile" />
         </form>
+        <img alt="book img" src={userObj.photoURL} />
         <button onClick={onLogOutClick}>Log Out</button>
       </div>
     </>

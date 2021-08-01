@@ -62,7 +62,10 @@ export default () => {
         .collection("bookapplication")
         .orderBy("createdAt","desc")
         .get();
-        setBooks(books.docs.map((doc) => doc.data()));
+        setBooks(books.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data()
+        })));
         // console.log(books.docs.map((doc) => doc.data()));
     };
   
@@ -76,7 +79,7 @@ export default () => {
           <Link to={`/bookdetail/${book.id}`}>
           <ListItem className={classes.ListItem} key={book.id}>
               <div className={classes.bookImageBox}>
-                  <img className={classes.bookImage} alt="Travis Howard" src={book.attachmentUrl} />
+                  <img className={classes.bookImage} alt="book img" src={book.attachmentUrl} />
               </div>
               <ListItemText
                 className={classes.bookTextBox}
