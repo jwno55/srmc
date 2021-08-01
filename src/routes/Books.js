@@ -39,62 +39,70 @@ const useStyles = makeStyles((theme) => ({
     display:"flex",
     flexWrap:"wrap",
   },
+  loadingStyle: {
+    padding: '20px',
+  }
 }));
 
 export default () => {
-    // const [books, setBooks] = useState([]);
-    // useEffect(() => {
-    //   dbService.collection("bookapplication").onSnapshot((snapshot) => {
-    //     const bookArray = snapshot.docs.map((doc) => ({
-    //       id: doc.id,
-    //       ...doc.data(),
-    //     }));
-    //     setBooks(bookArray);
-    //   });
-    // }, []);
+  // const [books, setBooks] = useState([]);
+  // useEffect(() => {
+  //   dbService.collection("bookapplication").onSnapshot((snapshot) => {
+  //     const bookArray = snapshot.docs.map((doc) => ({
+  //       id: doc.id,
+  //       ...doc.data(),
+  //     }));
+  //     setBooks(bookArray);
+  //   });
+  // }, []);
 
-    const classes = useStyles();
+  const classes = useStyles();
+  const [loading, setLoading] = useState(true);
+  const [books, setBooks] = useState([]);
 
-    const [books, setBooks] = useState([]);
+  const getSrBooks = async () => {
+    const books = await dbService
+      .collection("bookapplication")
+      .orderBy("createdAt","desc")
+      .get();
+      setBooks(books.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data()
+      })));
+      setLoading(false);
+  };
 
-    const getSrBooks = async () => {
-      const books = await dbService
-        .collection("bookapplication")
-        .orderBy("createdAt","desc")
-        .get();
-        setBooks(books.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data()
-        })));
-        // console.log(books.docs.map((doc) => doc.data()));
-    };
-  
-    useEffect(() => {
-      getSrBooks();
-    }, []);
+  useEffect(() => {
+    getSrBooks();
+  }, []);
 
-    return(
-        <List className={classes.bookroot}>
-          {books.map((book) => (
-          <Link to={`/bookdetail/${book.id}`}>
-          <ListItem className={classes.ListItem} key={book.id}>
-              <div className={classes.bookImageBox}>
-                  <img className={classes.bookImage} alt="book img" src={book.attachmentUrl} />
+  return(
+    <>
+      {loading ? (
+          <div className={classes.loadingStyle}>loading...</div>
+      ) : (
+      <List className={classes.bookroot}>
+        {books.map((book) => (
+        <Link to={`/bookdetail/${book.id}`}>
+        <ListItem className={classes.ListItem} key={book.id}>
+            <div className={classes.bookImageBox}>
+                <img className={classes.bookImage} alt="book img" src={book.attachmentUrl} />
+            </div>
+            <ListItemText
+              className={classes.bookTextBox}
+              primary={book.title}
+              secondary={
+              <div className={classes.bookTextBoxIn}>
+                  <div className={classes.inline} >
+                    {book.text}
+                  </div>
               </div>
-              <ListItemText
-                className={classes.bookTextBox}
-                primary={book.title}
-                secondary={
-                <div className={classes.bookTextBoxIn}>
-                    <div className={classes.inline} >
-                      {book.text}
-                    </div>
-                </div>
-                }
-              />
-          </ListItem>
-          </Link>
-          ))}
-      </List>
-    )
-};
+              }
+            />
+        </ListItem>
+        </Link>
+        ))}
+    </List>
+    )}
+  </>
+)};
