@@ -4,13 +4,32 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   book_box: {
-      margin: '20px',
+    marginBottom: '100px',
   },
   bookImage: {
     width: '100%',
+    border: "1px solid #000",
   },
   loadingStyle: {
     padding: '20px',
+  },
+  bookImageBox: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: '30px',
+  },
+  bookTitleBox:{
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+    width: '100%',
+  },
+  bookTitle: {
+    fontSize: '2rem',
+    fontWeight: '800',
   },
 }));
 
@@ -43,9 +62,14 @@ export default ({ match }) => {
           <div className={classes.loadingStyle}>loading...</div>
       ) : (
       <div className={classes.book_box}>
-        <p>{book.title}</p>
+        <div className={classes.bookImageBox}>
+          <img className={classes.bookImage} alt="book img" src={book.attachmentUrl} />
+          <div className={classes.bookTitleBox}>
+            <div className={classes.bookTitle}>{book.title}</div>
+            <div>By Ki-Dong Kim</div>
+          </div>
+        </div>
         <p>{book.text}</p>
-        <img className={classes.bookImage} alt="book img" src={book.attachmentUrl} />
       </div>
       )}
     </>
