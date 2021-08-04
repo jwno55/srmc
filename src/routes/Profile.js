@@ -6,6 +6,11 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme) => ({
   profile_box: {
       margin: '20px',
+      backgroundColor: '#f7f7f7',
+      display:'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      height: '100vh',
   },
   admin_box: {
     margin: '20px',
@@ -42,18 +47,26 @@ export default ({refresUser, userObj}) => {
   return (
     <>
       <div className={classes.profile_box}>
-        <p>Profile Page</p>
-        <form onSubmit={onSubmit}>
-          <input 
-            onChange={onChange}
-            type="text" 
-            placeholder="Display Name" 
-            value={newDisplayName}
-          />
-          <input type="submit" value="Update Profile" />
-        </form>
-        <img alt="book img" src={userObj.photoURL} />
-        <button onClick={onLogOutClick}>Log Out</button>
+        <div>
+          <img alt="book img" src={userObj.photoURL} />
+          <div>{newDisplayName}</div>
+        </div>
+
+        <div>
+          <form onSubmit={onSubmit}>
+            <input 
+              onChange={onChange}
+              type="text" 
+              placeholder="Display Name" 
+              value={newDisplayName}
+            />
+            <input type="submit" value="Update Profile" />
+          </form>
+        </div>
+
+        <div>
+          <button onClick={onLogOutClick}>Log Out</button>
+        </div>
       </div>
     </>
   );
