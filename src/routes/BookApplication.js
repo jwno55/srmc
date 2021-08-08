@@ -11,8 +11,10 @@ const useStyles = makeStyles((theme) => ({
 
 const BookApplication = () => {
   const classes = useStyles();
-  const [books, setBooks] = useState("");
-  const [contents, setContents] = useState("");
+  const [books, setBooks] = useState({
+    books: "",
+    contents: ""
+  });
   const [attachment, setAttachment] = useState();
 
   const onSubmit = async (event) => {
@@ -26,29 +28,21 @@ const BookApplication = () => {
       attachmentUrl = await response.ref.getDownloadURL();
     }
     const bookObj = {
-      title: books,
-      text: contents,
+      title: books.books,
+      text: books.contents,
       createdAt: Date.now(),
       attachmentUrl,
     };
     await dbService.collection("bookapplication").add(bookObj);
     setBooks("");
-    setContents("");
     setAttachment();
   };
 
-  const onChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setBooks(value);
-  };
-
-  const onChangeContents = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setContents(value);
+  const onChange = (e) => {
+    setBooks({
+      ...books, 
+      [e.target.name]: e.target.value
+    })
   };
 
   const onFileChange = (event) => {
@@ -73,18 +67,19 @@ const BookApplication = () => {
     <div className={classes.admin_box}>
       <form onSubmit={onSubmit}>
         <input
-          value={books}
+          name="books"
+          value={books.books}
           onChange={onChange}
           type="text"
           placeholder="Book Name"
           maxLength={120}
         />
-        <input
-          value={contents}
-          onChange={onChangeContents}
+        <textarea
+          name="contents"
+          value={books.contents}
+          onChange={onChange}
           type="text"
           placeholder="Book Contents"
-          maxLength={120}
         />
         <input type="file" accept="image/*" onChange={onFileChange} />
         <input type="submit" value="Application" />
