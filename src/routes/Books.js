@@ -1,43 +1,33 @@
 import React, { useState, useEffect } from "react";
 import { dbService } from "fbase";
 import { makeStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
 import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   bookroot: {
     width: '100%',
+    padding: '20px 10px',
   },
-  inline: {
-    display: 'inline',
+  listItem: {
+    display: 'flex',
+    flexDirection: 'column',
+    flexWrap:"wrap",
+    marginBottom:"20px",
   },
   bookImageBox: {
     flex: 1,
-    border: "1px solid #ccc",
-    marginRight: "20px",
-    marginTop: "5px",
-    marginBottom: "5px",
-    paddingTop: "15px",
-    paddingBottom: "15px",
-    boxShadow: "2px 2px 3px #ccc",
   },
   bookImage: {
-      width: '100%'
+    width: '100%',
+    border: "1px solid #707070",
+    boxShadow: "1px 1px 1px #ccc ",
   },
-  ListItem: {
+  bookTitle: {
     
   },
-  bookTextBox: {
-    marginTop: "5px",
-    paddingTop: "15px",
-    height: "25vh",
-    flex: 2,
-  },
-  bookTextBoxIn: {
-    display:"flex",
-    flexWrap:"wrap",
+  bookText: {
+    height: "60px",
+    overflow: "hidden",
   },
   loadingStyle: {
     padding: '20px',
@@ -81,28 +71,23 @@ export default () => {
       {loading ? (
           <div className={classes.loadingStyle}>loading...</div>
       ) : (
-      <List className={classes.bookroot}>
+      <div className={classes.bookroot}>
         {books.map((book) => (
         <Link to={`/bookdetail/${book.id}`}>
-        <ListItem className={classes.ListItem} key={book.id}>
-            <div className={classes.bookImageBox}>
-                <img className={classes.bookImage} alt="book img" src={book.attachmentUrl} />
-            </div>
-            <ListItemText
-              className={classes.bookTextBox}
-              primary={book.title}
-              secondary={
-              <div className={classes.bookTextBoxIn}>
-                  <div className={classes.inline} >
-                    {book.text}
-                  </div>
+          <div className={classes.listItem} key={book.id}>
+              <div className={classes.bookImageBox}>
+                  <img className={classes.bookImage} alt="book img" src={book.attachmentUrl} />
               </div>
-              }
-            />
-        </ListItem>
+              <div className={classes.bookTitle}>
+                {book.title}
+              </div>
+              <div className={classes.bookText}>
+                {book.text}
+              </div>
+          </div>
         </Link>
         ))}
-    </List>
+    </div>
     )}
   </>
 )};
