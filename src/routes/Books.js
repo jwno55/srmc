@@ -10,7 +10,6 @@ const useStyles = makeStyles((theme) => ({
   },
   listItem: {
     display: 'flex',
-    flexDirection: 'column',
     flexWrap:"wrap",
     marginBottom:"20px",
   },
@@ -22,8 +21,13 @@ const useStyles = makeStyles((theme) => ({
     border: "1px solid #707070",
     boxShadow: "1px 1px 1px #ccc ",
   },
+  bookTextBox: {
+    flex: 1.5,
+  },
   bookTitle: {
-    
+    flex: 1,
+    display: 'flex',
+    flexWrap:"wrap",
   },
   bookText: {
     height: "60px",
@@ -78,11 +82,13 @@ export default () => {
               <div className={classes.bookImageBox}>
                   <img className={classes.bookImage} alt="book img" src={book.attachmentUrl} />
               </div>
-              <div className={classes.bookTitle}>
-                {book.title}
-              </div>
-              <div className={classes.bookText}>
-                {book.text}
+              <div className={classes.bookTextBox}>
+                <div className={classes.bookTitle}>
+                  {book.title}
+                </div>
+                <div className={classes.bookText}>
+                  {book.contents}
+                </div>
               </div>
           </div>
         </Link>
