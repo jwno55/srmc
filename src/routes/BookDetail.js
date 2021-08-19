@@ -11,7 +11,6 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: '100px',
     display: 'flex',
     flexDirection: 'column',
-    backgroundColor: '#ffffff',
   },
 
   bookImageBox: {
@@ -22,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     margin: '30px',
   },
   bookImage: {
-    width: '100%',
+    width: '80%',
     border: "1px solid #000",
   },
 
@@ -34,24 +33,48 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     marginBottom: '30px',
   },
+  bookSeries: {
+    color: '#aeaeae',
+    fontSize: '0.9rem',
+    fontWeight: '500',
+  },
   bookTitle: {
-    fontSize: '2rem',
+    textAlign: 'center',
+    fontSize: '1.5rem',
     fontWeight: '800',
+    marginBottom: '10px',
+  },
+  bookAuthor: {
+    fontSize: '1rem',
+    fontWeight: '500',
   },
 
   bookInfoBox:{
+    margin: "0 20px 20px 20px",
+    borderTop: "1px solid #ccc",
+    paddingBottom: '20px',
+    borderBottom: "1px solid #ccc",
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     flexWrap: 'wrap',
-    width: '100%',
-    marginBottom: '30px',
   },
   bookInfo: {
     flex:1,
     display: 'flex',
+    flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
+    marginTop: '20px',
+    borderRight: "1px solid #ccc",
+  },
+  bookInfoLast: {
+    flex:1,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: '20px',
   },
 
   bookContentsBox:{
@@ -71,9 +94,9 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'center',
     position: 'fixed',
-    bottom: '60px',
+    bottom: '70px',
     width: '100%',
-    height:'60px',
+    height:'70px',
     backgroundColor: '#f7f7f7',
   },
   applyButton:{
@@ -118,14 +141,26 @@ export default ({ match }) => {
           <img className={classes.bookImage} alt="book img" src={book.attachmentUrl} />
         </div>
         <div className={classes.bookTitleBox}>
-            <div>Kim Ki Dong Theology Series {book.series}</div>
+            <div className={classes.bookSeries}>Kim Ki Dong Theology Series {book.series}</div>
             <div className={classes.bookTitle}>{book.title}</div>
-            <div>By Ki-Dong Kim</div>
+            <div className={classes.bookAuthor}>By Ki-Dong Kim</div>
         </div>
         <div className={classes.bookInfoBox}>
-          <div className={classes.bookInfo}>language</div>
-          <div className={classes.bookInfo}>released</div>
-          <div className={classes.bookInfo}>publisher</div>
+          <div className={classes.bookInfo}>
+            <div>LANGUAGE</div>
+            <div>EN</div>
+            <div>English</div>
+          </div>
+          <div className={classes.bookInfo}>
+            <div>RELEASED</div>
+            <div>1991</div>
+            <div>jan 18</div>
+          </div>
+          <div className={classes.bookInfoLast}>
+            <div>PUBLISHER</div>
+            <div>Berea</div>
+            <div>press</div>
+          </div>
         </div>
         <div className={classes.bookContentsBox}>
           <div className={classes.bookContents}>Preface</div>

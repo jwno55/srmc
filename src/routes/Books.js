@@ -4,38 +4,54 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
-  bookroot: {
-    width: '100%',
-    padding: '20px 10px',
+  loadingStyle: {
+    padding: '20px',
   },
+
+  bookList: {
+    marginBottom: '100px',
+  },
+
+  listLink: {
+    textDecoration: 'none',
+  },
+
   listItem: {
     display: 'flex',
     flexWrap:"wrap",
-    marginBottom:"20px",
+    margin: '15px 15px 0px 15px',
+    paddingBottom: '10px',
+    borderBottom: "1px solid #ccc",
   },
+
   bookImageBox: {
     flex: 1,
+    marginRight: '20px',
   },
   bookImage: {
     width: '100%',
     border: "1px solid #707070",
     boxShadow: "1px 1px 1px #ccc ",
   },
+
   bookTextBox: {
     flex: 1.5,
   },
-  bookTitle: {
-    flex: 1,
-    display: 'flex',
-    flexWrap:"wrap",
+  bookSeries: {
+    color: '#aeaeae',
+    fontSize: '0.8rem',
   },
-  bookText: {
-    height: "60px",
+  bookTitle: {
+    color: 'black',
+    fontSize: '1rem',
+    fontWeight: 'bold',
+    marginBottom: '10px',
+  },
+  bookSummary: {
+    color: '#aeaeae',
+    height: "80px",
     overflow: "hidden",
   },
-  loadingStyle: {
-    padding: '20px',
-  }
 }));
 
 export default () => {
@@ -75,20 +91,18 @@ export default () => {
       {loading ? (
           <div className={classes.loadingStyle}>loading...</div>
       ) : (
-      <div className={classes.bookroot}>
+      <div className={classes.bookList}>
         {books.map((book) => (
-        <Link to={`/bookdetail/${book.id}`}>
-          <div className={classes.listItem} key={book.id}>
+        <Link to={`/bookdetail/${book.id}`} className={classes.listLink}>
+          <div className={classes.listItem}>
               <div className={classes.bookImageBox}>
                   <img className={classes.bookImage} alt="book img" src={book.attachmentUrl} />
               </div>
               <div className={classes.bookTextBox}>
-                <div className={classes.bookTitle}>
-                  {book.title}
-                </div>
-                <div className={classes.bookText}>
-                  {book.contents}
-                </div>
+                <div className={classes.bookSeries}>Berean books {book.series}</div>
+                <div className={classes.bookTitle}>{book.title}</div>
+                <div className={classes.bookSummary}>{book.summary}</div>
+                <div>...</div>
               </div>
           </div>
         </Link>

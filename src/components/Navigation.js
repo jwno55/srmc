@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
   nav_area: {
     width:"100%",
     bottom: 0,
-    paddingBottom:"4px",
+    paddingBottom:"14px",
     position: "fixed",
   },
   root: {
