@@ -7,8 +7,41 @@ const useStyles = makeStyles((theme) => ({
     padding: '20px',
   },
 
+  modalBox: {
+    top:0,
+    width: '100%',
+    height: '100%',
+    zIndex: '1',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'fixed',
+    background: 'rgba(0, 0, 0, .5)',
+  },
+  modalCon: {
+    width: '80%',
+    height: '200px',
+    zIndex: '2',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    padding: '20px',
+    backgroundColor: 'white',
+    opacity : '1',
+    fontSize : '1.1rem',
+    textAlign : 'center',
+  },
+  modalButton: {
+    fontSize : '1.1rem',
+    textAlign : 'center',
+    padding : '10px 50px',
+    backgroundColor : 'white',
+  },
+
   bookBox: {
-    marginBottom: '100px',
+    position: 'relative',
+    marginBottom: '150px',
     display: 'flex',
     flexDirection: 'column',
   },
@@ -42,7 +75,7 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     fontSize: '1.5rem',
     fontWeight: '800',
-    marginBottom: '10px',
+    margin: '0px 20px 10px 20px',
   },
   bookAuthor: {
     fontSize: '1rem',
@@ -76,6 +109,16 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     marginTop: '20px',
   },
+  bookInfoText: {
+    marginTop: '10px',
+    fontSize: '1.2rem',
+    fontWeight: '800',
+  },
+  bookInfoSubText: {
+    fontSize: '0.7rem',
+    fontWeight: '700',
+    color: 'gray',
+  },
 
   bookContentsBox:{
     display: 'flex',
@@ -86,8 +129,32 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     marginBottom: '30px',
   },
+  bookContentsTitle: {
+    margin: '10px 20px',
+    fontSize: '1.0rem',
+    fontWeight: '800',
+  },
   bookContents: {
+    margin: '0px 20px 10px 20px',
+  },
+  bookContentsSub: {
+    width: '100%',
+    margin: '0px 20px 10px 20px',
+    color: 'gray',
+  },
+
+  addInfoBox:{
+    margin: "0 20px 20px 20px",
+    paddingTop: "20px",
+    borderTop: "1px solid #ccc",
+  },
+  addInfoTitle:{
+    fontSize: '1.0rem',
+    fontWeight: '800',
     marginBottom: '10px',
+  },
+  addInfoText:{
+    color: 'gray',
   },
 
   applyBox:{
@@ -97,13 +164,15 @@ const useStyles = makeStyles((theme) => ({
     bottom: '70px',
     width: '100%',
     height:'70px',
-    backgroundColor: '#f7f7f7',
+    backgroundColor: '#f1f1f1',
   },
   applyButton:{
     flex:1,
-    margin: '10px',
+    margin: '15px 20px',
     color: "white",
     backgroundColor: 'black',
+    fontSize: '1.2rem',
+    fontWeight: '700',
   },
   
 }));
@@ -112,6 +181,7 @@ export default ({ match }) => {
   const classes = useStyles();
   const [loading, setLoading] = useState(true);
   const [book, setBook] = useState([]);
+  const [modal, setModal] = useState(false);
  
   const getSrBook = async () => {
       const book = dbService.collection("bookapplication").doc(match.params.id);
@@ -131,12 +201,26 @@ export default ({ match }) => {
     getSrBook();
   }, []);
 
+  const openModal = () => setModal(true);
+  const closeModal = () => setModal(false);
+
   return (
     <>
       {loading ? (
           <div className={classes.loadingStyle}>loading...</div>
       ) : (
       <div className={classes.bookBox}>
+        
+        { modal ? (
+        <div className={classes.modalBox}>
+          <div className={classes.modalCon}>
+            Saint<br />
+            Please choose an option
+            <button className={classes.modalButton} onClick={ closeModal }>GO CART</button>
+          </div>
+        </div>
+        ) : ( null )}
+
         <div className={classes.bookImageBox}>
           <img className={classes.bookImage} alt="book img" src={book.attachmentUrl} />
         </div>
@@ -147,23 +231,23 @@ export default ({ match }) => {
         </div>
         <div className={classes.bookInfoBox}>
           <div className={classes.bookInfo}>
-            <div>LANGUAGE</div>
-            <div>EN</div>
-            <div>English</div>
+            <div className={classes.bookInfoSubText}>LANGUAGE</div>
+            <div className={classes.bookInfoText}>EN</div>
+            <div className={classes.bookInfoSubText}>English</div>
           </div>
           <div className={classes.bookInfo}>
-            <div>RELEASED</div>
-            <div>1991</div>
-            <div>jan 18</div>
+            <div className={classes.bookInfoSubText}>RELEASED</div>
+            <div className={classes.bookInfoText}>{book.publication.substring(0,4)}</div>
+            <div className={classes.bookInfoSubText}>{book.publication.substring(5,10)}</div>
           </div>
           <div className={classes.bookInfoLast}>
-            <div>PUBLISHER</div>
-            <div>Berea</div>
-            <div>press</div>
+            <div className={classes.bookInfoSubText}>PUBLISHER</div>
+            <div className={classes.bookInfoText}>Berea</div>
+            <div className={classes.bookInfoSubText}>press</div>
           </div>
         </div>
         <div className={classes.bookContentsBox}>
-          <div className={classes.bookContents}>Preface</div>
+          <div className={classes.bookContentsTitle}>Preface</div>
           <div className={classes.bookContents}>
           {book.contents.split("\n").map((line) => {
             return (
@@ -174,19 +258,28 @@ export default ({ match }) => {
             );
           })}
           </div>
-          <div className={classes.bookContents}>{book.bottomsentence}</div>
+          <div className={classes.bookContentsSub}>{book.bottomsentence}</div>
         </div>
-        <div>
-          Shipping Information
+        <div className={classes.addInfoBox}>
+          <div className={classes.addInfoTitle}>
+            Shipping Information
+          </div>
+          <div className={classes.addInfoText}>
+            Delivery may be delayed due to weather or parcel circumstances.
+          </div>
         </div>
-        <div>
+        <div className={classes.addInfoBox}>
+          <div className={classes.addInfoTitle}>
           Version History
-        </div>
-        <div>
-          More books by Ki-Dong Kim
+          </div>
+          <div className={classes.addInfoText}>
+            {book.history}
+          </div>
         </div>
         <div className={classes.applyBox}>
-          <button className={classes.applyButton}>add to cart</button>
+          <button className={classes.applyButton} onClick={ openModal } >
+            add to cart
+          </button>
         </div>
       </div>
       )}
