@@ -20,13 +20,21 @@ const useStyles = makeStyles((theme) => ({
     },
     title: {
       flexGrow: 1,
+      display: 'flex',
+      justifyContent : 'space-between',
     },
     link: {
         color: '#919191',
         textDecoration: 'none',
         fontSize: '1rem',
         fontWeight: '800',
-      },
+    },
+    adimnLink: {
+        color: '#919191',
+        textDecoration: 'none',
+        fontSize: '1rem',
+        fontWeight: '800',
+    },
   }));
 
 const TopBar = ({userObj}) => {
@@ -40,6 +48,15 @@ const TopBar = ({userObj}) => {
                     <Link to="/" className={classes.link}>
                         Hello {userObj.displayName}
                     </Link>
+                    {
+                        (userObj.uid==='zf3GLDKHN2anphR5MjafJ9lTWt82') ? (
+                        <Link to="/BookApplication" className={classes.adimnLink}>
+                            admin
+                        </Link>
+                        ) : (
+                        null
+                        )
+                    }
                 </Typography>
             </Toolbar>
         </AppBar>
