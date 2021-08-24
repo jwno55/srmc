@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { dbService } from "fbase";
 import { makeStyles } from '@material-ui/core/styles';
+import Loading from "components/Loading";
 
 const useStyles = makeStyles((theme) => ({
-  loadingStyle: {
-    padding: '20px',
-  },
-
   modalBox: {
     top:0,
     width: '100%',
@@ -207,7 +204,7 @@ export default ({ match }) => {
   return (
     <>
       {loading ? (
-          <div className={classes.loadingStyle}>loading...</div>
+          <Loading />
       ) : (
       <div className={classes.bookBox}>
         
@@ -249,9 +246,9 @@ export default ({ match }) => {
         <div className={classes.bookContentsBox}>
           <div className={classes.bookContentsTitle}>Preface</div>
           <div className={classes.bookContents}>
-          {book.contents.split("\n").map((line) => {
+          {book.contents.split("\n").map((line, i) => {
             return (
-              <span>
+              <span key={i}>
                 {line}
                 <br />
               </span>

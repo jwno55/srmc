@@ -3,6 +3,7 @@ import AppRouter from "components/Router";
 import { authService } from "fbase";
 import CssBaseline from "@material-ui/core/CssBaseline"
 import { makeStyles } from '@material-ui/core/styles';
+import Loading from "./Loading";
 
 const useStyles = makeStyles((theme) => ({
   init_box: {
@@ -61,14 +62,7 @@ function App() {
       {init ? 
         <AppRouter refresUser={refresUser} isLoggedIn={isLoggedIn} userObj={userObj} /> 
         : 
-        <div className={classes.init_box}>
-          <div className={classes.init_box_main_title}>
-            Berea Movement is to Return to the Word!
-          </div>
-          <div>
-            “These were more fair-minded than those in Thessalonica, in that they received the word with all readiness, and searched the Scriptures daily to find out whether these things were so.” (Acts17:11)
-          </div>
-        </div>
+        <Loading />
       }
     </>
   );

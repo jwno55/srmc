@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { makeStyles } from '@material-ui/core/styles';
+import Loading from "components/Loading";
 
 const useStyles = makeStyles((theme) => ({
     feed: {
@@ -22,7 +23,7 @@ export default ({ loading, Feeding }) => {
     return(
     <div className={classes.feed}>
         {loading ? (
-            <div>loading</div>
+            <Loading />
         ) : (
             <>
                 <div className={classes.content}>

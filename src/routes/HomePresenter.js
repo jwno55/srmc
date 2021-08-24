@@ -2,20 +2,21 @@ import React, { useState } from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from "react-router-dom";
 import Avatar from '@material-ui/core/Avatar';
+import Loading from "components/Loading";
 
 const useStyles = makeStyles((theme) => ({
     feeds: {
         marginBottom: '90px',
     },
     feed: {
-        height: '32vh',
         overflow: 'hidden',
         borderBottom: '1px solid #ccc',
     },
     feedImg: {
-      width: '100%',
-      position: 'relative',
-      zIndex:-1,
+        width: '100%',
+        position: 'relative',
+        zIndex:-1,
+        verticalAlign: 'bottom',
     },
     feedTitleBox: {
         display: 'flex',
@@ -44,9 +45,6 @@ const useStyles = makeStyles((theme) => ({
             color: "black",
         },
     },
-    loadingStyle: {
-        padding: '20px',
-    }
 }));
 
 export default ({ loading, nowFeeding, userObj }) => {
@@ -56,12 +54,12 @@ export default ({ loading, nowFeeding, userObj }) => {
     return(
     <div className={classes.feeds}>
         {loading ? (
-            <div className={classes.loadingStyle}>loading...</div>
+            <Loading />
         ) : (
             <>
-                {nowFeeding.map(feed => (
+                {nowFeeding.map((feed, i) => (
                     <>
-                    <Link to={`/detail/${feed.id}`} className={classes.feedLink}>
+                    <Link to={`/detail/${feed.id}`} className={classes.feedLink} key={i}>
                         <div className={classes.feed} to={`/detail/${feed.id}`}>
                             <img className={classes.feedImg} src={feed.jetpack_featured_media_url} />
                         </div>

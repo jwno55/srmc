@@ -19,8 +19,6 @@ export default ({ match }) => {
         });
     };
 
-    console.log(feed);
-    
     useEffect(() =>{
         getData();
     }, []);

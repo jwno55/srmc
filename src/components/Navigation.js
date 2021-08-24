@@ -42,7 +42,7 @@ const Navigation = () => {
   const goProfile = () => history.push('/profile');
 
   return(
-    <Paper zDepth={1} className={classes.nav_area}>
+    <Paper className={classes.nav_area}>
         <BottomNavigation 
           value={value}
           onChange={(event, newValue) => {

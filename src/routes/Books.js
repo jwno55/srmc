@@ -2,12 +2,9 @@ import React, { useState, useEffect } from "react";
 import { dbService } from "fbase";
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from "react-router-dom";
+import Loading from "components/Loading";
 
 const useStyles = makeStyles((theme) => ({
-  loadingStyle: {
-    padding: '20px',
-  },
-
   bookList: {
     marginBottom: '100px',
   },
@@ -89,11 +86,11 @@ export default () => {
   return(
     <>
       {loading ? (
-          <div className={classes.loadingStyle}>loading...</div>
+          <Loading />
       ) : (
       <div className={classes.bookList}>
-        {books.map((book) => (
-        <Link to={`/bookdetail/${book.id}`} className={classes.listLink}>
+        {books.map((book, i) => (
+        <Link to={`/bookdetail/${book.id}`} className={classes.listLink} key={i}>
           <div className={classes.listItem}>
               <div className={classes.bookImageBox}>
                   <img className={classes.bookImage} alt="book img" src={book.attachmentUrl} />
